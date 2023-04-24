@@ -22,8 +22,8 @@ function onSubmit(e){
     //    li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
     let nam = nameInput.value;
     let Email = emailInput.value;
-    //    userList.appendChild(li);
-    localStorage.setItem(nam,Email);
+
+    localStorage.setItem(Email,['name',nam,'email',Email]);
     
     //    //clear field
        nameInput.value = '';
