@@ -6,6 +6,7 @@ const userList = document.querySelector('#users');
 
 myForm.addEventListener('submit', onSubmit);
 
+
 function onSubmit(e){
     e.preventDefault();
 
@@ -17,12 +18,14 @@ function onSubmit(e){
        setTimeout(() => msg.remove(),3000);
    }else{
        // console.log("success");
-       const li = document.createElement('li');
-       li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
-
-       userList.appendChild(li);
-
-       //clear field
+    //    const li = document.createElement('li');
+    //    li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
+    let nam = nameInput.value;
+    let Email = emailInput.value;
+    //    userList.appendChild(li);
+    localStorage.setItem(nam,Email);
+    
+    //    //clear field
        nameInput.value = '';
        emailInput.value = '';
    }
