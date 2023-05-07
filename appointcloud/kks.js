@@ -20,6 +20,28 @@ function saveTocloud(event){
     // localStorage.setItem(obj.email,JSON.stringify(obj));
      
 }
+window.addEventListener("DOMContentLoaded", () => {
+        axios.get("https://crudcrud.com/api/fe76864dc2504937a05bfb9677a5ae55/apoint")
+        .then((response) => {
+            //console.log(response)
+            for(var i=0; i< response.data.length; i++){
+                userOnscreen(response.data[i])
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    
+    // const localStorageobj = localStorage;
+    // const localStoragekeys = Object.keys(localStorageobj);
+
+    // for(var i=0; i< localStoragekeys.length; i++){
+    //     const key = localStoragekeys[i];
+    //     const userDetailsString = localStorageobj[key];
+    //     const userDetailsobj = JSON.parse(userDetailsString);
+    //     userOnscreen(userDetailsobj)
+    // }
+})
 function userOnscreen(obj){
     const parentItem = document.getElementById('listofitems');
 
