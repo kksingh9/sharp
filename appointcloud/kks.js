@@ -8,7 +8,7 @@ function saveTocloud(event){
         email,
         phonenumber
     }
-    axios.post("https://crudcrud.com/api/fe76864dc2504937a05bfb9677a5ae/apoint",obj)
+    axios.post("https://crudcrud.com/api/d00a18d9149545339746250a76d50bad/user",obj)
         .then((response) => {
             userOnscreen(response.data);
            // console.log(response)
@@ -21,7 +21,7 @@ function saveTocloud(event){
      
 }
 window.addEventListener("DOMContentLoaded", () => {
-        axios.get("https://crudcrud.com/api/fe76864dc2504937a05bfb9677a5ae55/apoint")
+        axios.get("https://crudcrud.com/api/d00a18d9149545339746250a76d50bad/user")
         .then((response) => {
             //console.log(response)
             for(var i=0; i< response.data.length; i++){
@@ -32,16 +32,8 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log(error)
         })
     
-    // const localStorageobj = localStorage;
-    // const localStoragekeys = Object.keys(localStorageobj);
-
-    // for(var i=0; i< localStoragekeys.length; i++){
-    //     const key = localStoragekeys[i];
-    //     const userDetailsString = localStorageobj[key];
-    //     const userDetailsobj = JSON.parse(userDetailsString);
-    //     userOnscreen(userDetailsobj)
-    // }
 })
+
 function userOnscreen(obj){
     const parentItem = document.getElementById('listofitems');
 
@@ -55,7 +47,14 @@ function userOnscreen(obj){
     editBtn.type = 'button';
     editBtn.value = 'edit';
     deletBtn.onclick = () => {
-        localStorage.removeItem(obj.email);
+        axios.delete('https://crudcrud.com/api/d00a18d9149545339746250a76d50bad/user/645764ef6246ac03e853a4af')
+    .then((res) => {
+        //userOnscreen(res.data)
+    })
+    .catch((err) => {
+        console.error(err)
+    });
+        //localStorage.removeItem(obj.email);
         parentItem.removeChild(li);
     }
     editBtn.onclick = () => {
