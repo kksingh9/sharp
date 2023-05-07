@@ -34,39 +34,54 @@ window.addEventListener("DOMContentLoaded", () => {
     
 })
 
-function userOnscreen(obj){
+function userOnscreen(user){
+   
+    document.getElementById('usernameInputtag').value = '';
+    document.getElementById('emailIdInputtag').value = '';
+    document.getElementById('phonenumberInputtag').value = '';
     const parentItem = document.getElementById('listofitems');
 
-    const li = document.createElement('li');
-    li.textContent = obj.name + ' - ' + obj.email + ' - ' + obj.phonenumber;
+    const childHTML = `<li id = ${user._id}> ${user.name} - ${user.email}
+                        <button onclick = deleteUser('${user._id}')> Delete User</button>
+                        <button onclick = editUserDetails('${user._id}','${user.email}','${user.name}','${user.phonenumber}')> Edituser</button>
+                        </li>`
+        parentItem.innerHTML = parentItem.innerHTML + childHTML;
+}
 
-    const deletBtn= document.createElement('input');
-    const editBtn= document.createElement('input');
-    deletBtn.type = 'button';
-    deletBtn.value = 'delete';
-    editBtn.type = 'button';
-    editBtn.value = 'edit';
-    deletBtn.onclick = () => {
-        axios.delete('https://crudcrud.com/api/d00a18d9149545339746250a76d50bad/user/645764ef6246ac03e853a4af')
+// edit user
+    function editUserDetails(userId,email,name,phonenumber){
+    //     axios.put(`https://crudcrud.com/api/d00a18d9149545339746250a76d50bad/user/${userId}/${name}/${email}/${phonenumber}
+    //         `
+    //     )
+    // //.then(res => console.log(res.data))
+    // .then(res => {
+         
+    // })
+    // .catch(err => console.log(err));
+        document.getElementById('usernameInputtag').value = name;
+        document.getElementById('emailIdInputtag').value = email;
+        document.getElementById('phonenumberInputtag').value = phonenumber;
+        deleteUser(userId)
+        
+    }
+
+    // deleteuser('user.id')
+    function deleteUser(userId){
+        axios.delete(`https://crudcrud.com/api/d00a18d9149545339746250a76d50bad/user/${userId}`)
     .then((res) => {
-        //userOnscreen(res.data)
+        removeUserfromscreen(userId);
     })
     .catch((err) => {
-        console.error(err)
-    });
-        //localStorage.removeItem(obj.email);
-        parentItem.removeChild(li);
+        console.log(err)
+    }); 
     }
-    editBtn.onclick = () => {
-        localStorage.removeItem(obj.email);
-        parentItem.removeChild(li);
-        document.getElementById('usernameInputtag').value = obj.name;
-        document.getElementById('emailIdInputtag').value = obj.email;
-        document.getElementById('phonenumberInputtag').value = obj.phonenumber;
+
+    function removeUserfromscreen(userId){
+        const parentItem = document.getElementById('listofitems');
+        const childNodeTobeDeleted = document.getElementById(userId);
+        if(childNodeTobeDeleted){
+            parentItem.removeChild(childNodeTobeDeleted);
+        }
     }
-    
-    li.appendChild(deletBtn);
-    li.appendChild(editBtn);
-    parentItem.appendChild(li);
+   
   
-}
