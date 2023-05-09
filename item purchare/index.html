@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inventory</title>
+</head>
+<body>
+    <form onsubmit="saveTocloud(event)">
+        <label>Item Name:</label><br>
+        <input type="text" name="itemname" id = "item" required /><br>
+        <label>Description:</label><br>
+        <input type="text" name="description" id = "itemdescription" required /><br>
+        <label>Price:</label><br>
+        <input type="number" name="price" id = "itemprice"><br>
+        <label>Quantity:</label><br>
+        <input type="number" name="quantity" id = "itemQuantity"><br>
+        <button class="btn">AddItem</button>
+    </form>
+    
+    <ul id="listofitems"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="purch.js"></script>
+</body>
+</html>
